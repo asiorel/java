@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Runner</string>
+    <string name="cyclesView_title">Ustaw czas ruchu</string>
+    <string name="cyclesText">Cykle</string>
+    <string name="runText">Bieg</string>
+    <string name="walkText">Marsz</string>
+    <string name="minText">min</string>
+</resources>
