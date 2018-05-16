@@ -12,7 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SetCyclesActivity extends AppCompatActivity {
+public class SetCyclesActivity extends AppCompatActivity{
 
     EditText runEditText,walkEditText,cycleEditText;
 
@@ -28,6 +28,23 @@ public class SetCyclesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_cycles);
 
+        init();
+
+        sharedPreferences = getSharedPreferences(preferences, Context.MODE_PRIVATE);
+
+        findViewById(R.id.cyclesView_layout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+                return true;
+            }
+        });
+
+
+    }
+
+    private void init(){
         runEditText = findViewById(R.id.runEditText);
         runEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -47,6 +64,7 @@ public class SetCyclesActivity extends AppCompatActivity {
             }
 
         });
+
 
         walkEditText = findViewById(R.id.walkEditText);
         walkEditText.addTextChangedListener(new TextWatcher() {
@@ -85,22 +103,11 @@ public class SetCyclesActivity extends AppCompatActivity {
 
             }
         });
-
-
-        sharedPreferences = getSharedPreferences(preferences, Context.MODE_PRIVATE);
-
-        findViewById(R.id.cyclesView_layout).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
-                return true;
-            }
-        });
-
-
     }
 
+    private boolean validate(){
+        return true;
+    }
     private boolean isValuesChanges(){
         if(runTime==0 & walkTime==0 & cycleCount==0) return false;
         else return true;
